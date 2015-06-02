@@ -12,6 +12,8 @@ gem 'pandocfilters', github: 'AndorChen/pandocfilters'
 
 ## Usage
 
+### Create a filter
+
 ```
 #!/usr/bin/env ruby
 
@@ -30,6 +32,18 @@ end
 
 PandocFilters.process &filter
 ```
+
+Write previous code into `page_break` file, then run `chmode u+x page_break` make it excutable.
+
+When use pandoc convert Markdown to docx, set `--filter` option to `page_break` file's path:
+
+```
+pandoc -f markdown -t docx -i sample.md --filter /path/to/page_break
+```
+
+### Use a build-in filter
+
+Use `PandocFilters.filter('page_break')` to get the file path to build-in `page_break` filter, then set `--filter` option to this path when use pandoc.
 
 ## Author
 
