@@ -3,6 +3,19 @@ require_relative 'pandocfilters/node'
 
 module PandocFilters
 
+  # Fetch prebuild filter.
+  #
+  # @param name [String] Filter name.
+  # @return     [String] Path to the filter.
+  def self.filter(name)
+    glob = File.expand_path('../pandocfilters/filters/*' ,__FILE__)
+    filters = Dir.glob(glob).map { |f| File.basename(f) }
+
+    raise "No build-in filter names #{name}" unless filters.include?(name)
+
+    File.expand_path("../pandocfilters/filters/#{name}" ,__FILE__)
+  end
+
   # Converts an action into a filter that reads a JSON-formatted
   # pandoc document from stdin, transforms it by walking the tree
   # with the action, and returns a new JSON-formatted pandoc document

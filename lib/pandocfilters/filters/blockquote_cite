@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+# Paragraph starts with `CITE:' act like blockquote cite.
+# Align the cite to right.
+
+require 'pandocfilters'
+
+filter = lambda do |key, value, format, meta|
+  if key == 'Para' && (cite = PandocFilters.stringify(value)).start_with?('CITE:')
+    cite.sub!(/CITE:\s?/, '')
+    xml = %(<w:p>
+    <w:pPr>
+        <w:pStyle w:val="BlockquoteCite"/>
+    </w:pPr>
+    <w:r>
+        <w:t xml:space="preserve">#{cite}</w:t>
+    </w:r>
+</w:p>)
+
+    return PandocFilters::Node.raw_block('openxml', xml)
+  end
+end
+
+PandocFilters.process &filter

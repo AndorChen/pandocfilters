@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+# Identify paragraph starts with `DEDICATION:' as dedication.
+# Then replace the dedication with raw OOXML xml, and trip off the `DEDICATION:'.
+# THe dedication is placed on a new page, and center aligned.
+
+require 'pandocfilters'
+
+filter = lambda do |key, value, format, meta|
+  if key == 'Para' && value[0]['c'] == 'DEDICATION:'
+    dedication = PandocFilters.stringify(value).sub(/DEDICATION:\s?/, '')
+    xml = %(<w:p>
+    <w:pPr>
+        <w:pStyle w:val="DedicationText"/>
+    </w:pPr>
+    <w:r>
+        <w:t xml:space="preserve">#{dedication}</w:t>
+    </w:r>
+</w:p>)
+
+    PandocFilters::Node.raw_block('openxml', xml)
+  end
+end
+
+PandocFilters.process &filter
