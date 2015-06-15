@@ -1,7 +1,4 @@
-$:.unshift(File.join(File.dirname(__FILE__), *%w[lib]))
-
-require 'date'
-require 'pandocfilters'
+require_relative 'lib/pandocfilters/version'
 
 #############################################################################
 #
@@ -15,10 +12,6 @@ end
 
 def version
   PandocFilters::VERSION
-end
-
-def date
-  Date.today.to_s
 end
 
 def gemspec_file
