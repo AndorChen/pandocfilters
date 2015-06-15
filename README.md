@@ -6,7 +6,13 @@ This is a Ruby port of origin [Python pandocfilters](https://github.com/jgm/pand
 
 ## Installation
 
+```ruby
+gem 'pandocfilters'
 ```
+
+or, use edge-version at GitHub:
+
+```ruby
 gem 'pandocfilters', github: 'AndorChen/pandocfilters'
 ```
 
