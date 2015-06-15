@@ -14,7 +14,7 @@ gem 'pandocfilters', github: 'AndorChen/pandocfilters'
 
 ### Create a filter
 
-```
+```ruby
 #!/usr/bin/env ruby
 
 # Identify paragraph contains `<!--PAGEBREAK-->' as page break in docx.
@@ -33,12 +33,12 @@ end
 PandocFilters.process &filter
 ```
 
-Write previous code into `page_break` file, then run `chmode u+x page_break` make it excutable.
+Write previous code into `page_break` file, then run `chmode u+x page_break` to make it excutable.
 
 When use pandoc convert Markdown to docx, set `--filter` option to `page_break` file's path:
 
-```
-pandoc -f markdown -t docx -i sample.md --filter /path/to/page_break
+```sh
+$ pandoc -f markdown -t docx -i sample.md --filter /path/to/page_break
 ```
 
 ### Use a build-in filter
