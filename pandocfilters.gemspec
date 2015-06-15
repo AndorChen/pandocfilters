@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.version       = PandocFilters::VERSION
   s.license       = 'MIT'
 
+  s.summary       = 'A Ruby gem for writing pandoc filters.'
   s.description   = 'A Ruby gem for writing pandoc filters.'
 
   s.authors       = ['Andor Chen']
